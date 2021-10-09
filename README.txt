@@ -20,18 +20,25 @@ Khosro Bahrami (2021). Maximum Local Variation (MLV) Code for sharpness assessme
 
 ===USAGE===
 
-Given noisy phase map 'Pn' only: 
+Given noisy phase map 'WPn' only: 
 To perform unwrapping, call the following MATLAB functions:
-	For ITV:  wrapper_unwrap_itv(Pn,Pn,'ITV',save_str)
-	For IHTV: wrapper_unwrap_itv3(Pn,Pn,'IHTV',save_str) 
-	For ITVC: wrapper_unwrap_itvc(Pn,Pn,'ITVC',save_str)
+	For ITV:  wrapper_unwrap_itv(WPn,WPn,'ITV',save_str)
+	For IHTV: wrapper_unwrap_itv3(WPn,WPn,'IHTV',save_str) 
+	For ITVC: wrapper_unwrap_itv3(WPn,WPn,'ITVC',save_str)
 where save_str is the string used for the .mat file used to store the results of the unwrapping
 
-Given noisy phase map 'Pn' and ground truth 'P': 
+Given noisy phase map 'WPn' and ground truth 'P': 
 To perform unwrapping, call the following MATLAB functions:
-	For ITV:  wrapper_unwrap_itv(P,Pn,'ITV',save_str)
-	For IHTV: wrapper_unwrap_itv3(P,Pn,'IHTV',save_str) 
-	For ITVC: wrapper_unwrap_itvc(P,Pn,'ITVC',save_str)
+	For ITV:  wrapper_unwrap_itv(P,WPn,'ITV',save_str)
+	For IHTV: wrapper_unwrap_itv3(P,WPn,'IHTV',save_str) 
+	For ITVC: wrapper_unwrap_itv3(P,WPn,'ITVC',save_str)
 where save_str is the string used for the .mat file used to store the results of the unwrapping
+
+===EXAMPLE===
+load('example-map-fine.mat'); 
+addpath ./lib/
+Pn = add_gnoise(P,pi/6); 
+WPn = wrapToPi(Pn);
+wrapper_unwrap_itv3(P,WPn,'ITVC','temp-result');
 
  
